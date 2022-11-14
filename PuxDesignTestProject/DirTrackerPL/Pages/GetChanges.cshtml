@@ -1,0 +1,13 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model GetChanges
+
+@{
+}
+
+<form method="post">
+    <p>Zadejte cestu k adresáři: </p>
+    <input type="text" asp-for="DirPath" placeholder="~"/>
+
+    <button type="submit">Poslat</button>
+</form>

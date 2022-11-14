@@ -1,0 +1,59 @@
+﻿@page
+@using DirTrackerBL.Enums
+@model ShowChanges
+
+@{
+}
+
+
+@switch (Model.Status)
+{
+    case InputStatus.InvalidDir:
+        <div>
+            Zadaný adresář je nevalidný, zadejte nový
+        </div>
+        break;
+
+    case InputStatus.NewDir:
+        <div>
+            Byl zadán nový adresář
+        </div>
+        break;
+
+    default:
+    {
+        if (Model.Changes.Count == 0)
+        {
+            <div>
+                Žádná změna
+            </div>
+        }
+
+        else
+        {
+            foreach (var change in Model.Changes)
+            {
+                if (change.ChangeType == ChangeStatus.Modified)
+                {
+                    <div>
+                        [@change.ChangeType] @change.Name (ve verzi @change.Version)
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        [@change.ChangeType] @change.Name
+                    </div>
+                }
+            }
+
+            <div>
+                <br>
+                [Added] = nový soubor<br>
+                [Modified] = změněný soubor<br>
+                [Deleted] = odstraněný soubor
+            </div>
+        }
+        break;
+    }
+}
